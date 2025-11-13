@@ -27,21 +27,44 @@ It is highly recommended to use a virtual environment.
 ### 🚀 Getting Started (Initial Run)
 The primary goal of the initial run is to confirm your environment (including GPU/CUDA if available) is set up correctly. We use the small, built-in COCO128 dataset for this purpose.
 1. Training CommandRun the following command from your terminal. The coco128.yaml and yolo11n.pt files will be downloaded automatically on the first execution.
-> yolo detect train \
+```
+yolo detect train \
     data=coco128.yaml \
     model=yolo11n.pt \
     epochs=100 \
     imgsz=640
+```
 
 2. Output and Results
 All training results are saved to a directory named `runs/detect/trainX/` (where X increments with each run).
 - Weights: The final trained model files (`best.pt`, `last.pt`) are stored here.
 - Logs: The `results.csv` file contains epoch-by-epoch metrics (loss, mAP).
 - Plots: Plots showing loss curves, mAP progression, and confusion matrices.
+
 ### 📊 Next Steps: Scaling to a Custom Dataset
 Once you have validated the pipeline using COCO128, follow these steps to use your own data:
 1. Data Preparation (YOLO Format)Ensure your images and annotations are structured as follows
-<pre> ``` my_custom_data/ ├── images/ │ ├── train/ │ └── val/ └── labels/ ├── train/ └── val/ ``` </pre>
-
+```
+my_custom_data/
+├── images/
+│   ├── train/
+│   └── val/
+└── labels/
+    ├── train/
+    └── val/
+```
 - Every image in `images/train` must have a corresponding `.txt` annotation file in `labels/train`.
-<pre> ## 2. Create a Custom YAML File Create a file named **`custom_data.yaml`** in the repository root to define your dataset configuration: ```yaml # custom_data.yaml # Paths relative to the YOLO working directory path: /path/to/my_custom_data train: images/train val: images/val # Number of classes nc: 2 # Map class IDs (0, 1) to names names: ['apple', 'banana'] ``` --- ## 3. Start Training Update the CLI command to reference your new YAML file: ```bash yolo detect train \ data=custom_data.yaml \ model=yolo11n.pt \ epochs=50 \ imgsz=640 ``` You can now adjust parameters like **`epochs`** and the **model size** (e.g., switch to `yolo11s.pt` for higher accuracy) based on your custom task and hardware constraints. </pre>
+2. Create a Custom YAML File Create a file named `custom_data.yaml` in the repository root to define your dataset configuration:
+```
+ # custom_data.yaml # Paths relative to the YOLO working directory path: /path/to/my_custom_data train: images/train val: images/val # Number of classes nc: 2 # Map class IDs (0, 1) to names names: ['apple', 'banana']
+``` 
+3. Start Training 
+Update the CLI command to reference your new YAML file:
+```
+ yolo detect train \ 
+        data=custom_data.yaml \ 
+        model=yolo11n.pt \ 
+        epochs=50 \ 
+        imgsz=640 
+``` 
+You can now adjust parameters like `epochs` and the model size(e.g., switch to `yolo11s.pt` for higher accuracy) based on your custom task and hardware constraints.
