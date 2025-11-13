@@ -14,7 +14,7 @@ This repository provides an end-to-end pipeline for training and experimenting w
 - Training and Metrics: Includes default configuration for training, validation, and outputting performance metrics (mAP, loss curves).
 
 **🛠️ Prerequisites**
-Before running any training commands, ensure you have the required software installed.
+- Before running any training commands, ensure you have the required software installed.
 1. Python: Python 3.8+
 2. PyTorch: The underlying deep learning framework.
 3. Ultralytics Package: The official YOLO library.
@@ -56,7 +56,15 @@ my_custom_data/
 - Every image in `images/train` must have a corresponding `.txt` annotation file in `labels/train`.
 2. Create a Custom YAML File Create a file named `custom_data.yaml` in the repository root to define your dataset configuration:
 ```
- # custom_data.yaml # Paths relative to the YOLO working directory path: /path/to/my_custom_data train: images/train val: images/val # Number of classes nc: 2 # Map class IDs (0, 1) to names names: ['apple', 'banana']
+ # custom_data.yaml
+ # Paths relative to the YOLO working directory 
+ path: /path/to/my_custom_data 
+ train: images/train 
+ val: images/val 
+ # Number of classes 
+ nc: 2 
+ # Map class IDs (0, 1) to names 
+ names: ['apple', 'banana']
 ``` 
 3. Start Training 
 Update the CLI command to reference your new YAML file:
