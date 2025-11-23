@@ -23,7 +23,7 @@ while True:
             cv2.putText(frame, label, (x1, y1 - 10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
-    cv2.imshow("YOLOv8 Live Detection", frame)
+    cv2.imshow("YOLOv11 Live Detection", frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
